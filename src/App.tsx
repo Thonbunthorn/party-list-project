@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { List } from "./components/List";
+import { AddToList } from "./components/AddToList";
 
+export interface IState {
+  people: {
+    name: string;
+    age: number;
+    url: string;
+    note?: string;
+  }[];
+}
 function App() {
+  const [people, setPeople] = useState<IState["people"]>([
+    {
+      name: "John",
+      age: 36,
+      url: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1b164L.img?w=768&h=403&m=6&x=499&y=86&s=114&d=114",
+      note: "lorem ipsum dolor sit amet lorem ipsum dolor",
+    },
+  ]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>People Invited to my party</h1>
+      <List people={people} />
+      <AddToList people={people} setPeople={setPeople} />
     </div>
   );
 }
